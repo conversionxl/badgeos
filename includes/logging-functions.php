@@ -41,8 +41,10 @@ function badgeos_post_log_entry( $object_id, $user_id = 0, $action = 'unlocked',
 	// Write log entry via filter so it can be modified by third-parties
 	$log_post_id = apply_filters( 'badgeos_post_log_entry', 0, $args );
 
-	// Available action for other processes
-	do_action( 'badgeos_create_log_entry', $log_post_id, $object_id, $user_id, $action );
+	if ( $object_id ) {
+		// Available action for other processes
+		do_action( 'badgeos_create_log_entry', $log_post_id, $object_id, $user_id, $action );
+	}
 
 	return $log_post_id;
 }
